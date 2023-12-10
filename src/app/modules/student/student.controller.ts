@@ -1,11 +1,10 @@
-import { NextFunction, Request, RequestHandler, Response } from 'express';
+import { RequestHandler } from 'express';
 import httpStatus from 'http-status';
 import sendResponse from '../../utils/sendResponse';
 import { StudentServices } from './student.service';
+import catchAsync from '../../utils/catchAsync';
 
-const catchAsync =(fn:RequestHandler) => {
-  return (req:Request,res:Response,next:NextFunction) => { Promise.resolve(fn(req, res, next)).catch(err => next(err)) }
-}
+
 
 
 
@@ -13,7 +12,6 @@ const catchAsync =(fn:RequestHandler) => {
 const getSingleStudent =catchAsync( async (
   req,
   res,
-  next,
 ) => {
  
     const { studentId } = req.params;
@@ -31,7 +29,6 @@ const getSingleStudent =catchAsync( async (
 const getAllStudents = catchAsync(async (
   req,
   res,
-  next,
 ) => {
     const result = await StudentServices.getAllStudentsFromDB();
 

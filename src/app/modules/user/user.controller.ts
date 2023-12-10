@@ -3,8 +3,9 @@ import httpStatus from 'http-status';
 import { RequestHandler} from 'express';
 import sendResponse from '../../utils/sendResponse';
 import { UserServices } from './user.service';
+import catchAsync from '../../utils/catchAsync';
 
-const createStudent:RequestHandler = async (
+const createStudent:RequestHandler =catchAsync( async (
   req,
   res,
   next,
@@ -28,7 +29,7 @@ const createStudent:RequestHandler = async (
   } catch (err) {
     next(err);
   }
-};
+});
 
 export const UserControllers = {
   createStudent,
